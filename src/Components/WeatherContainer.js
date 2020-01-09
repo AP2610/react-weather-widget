@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Time from "./Time";
 import "../styles.css";
 
 const key = "78ddbb0eef728d7c015c7f1e66d4a626"
@@ -11,7 +12,7 @@ class WeatherContainer extends Component {
         this.state = {
             isLoaded: false,
             timeZone: "",
-            CurrentData: {}
+            currentData: {}
         }
     };
 
@@ -19,35 +20,23 @@ class WeatherContainer extends Component {
         fetch(url)
             .then(response => response.json())
             .then(response => {
-                // console.log("Response: ",response)
-                this.setState({
+t                this.setState({
                     isLoaded: true,
                     timeZone: response.timezone,
-                    CurrentData: response.currently 
+                    currentData: response.currently 
                 })
             })
     }
 
-    dateFormatter = () => {
-        const days = ["Monday","Tuesday","Wednesday", "Thursday", "Friday"]
-        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-        if (this.state.isLoaded) {
-            const UnixTime = this.state.CurrentData.time
-            const date = new Date(UnixTime*1000)
-            const day = days[date.getUTCDay()]
-            const month = months[date.getUTCMonth()]
-            console.log(day, month)
-        };
-    }
-
     render() {
-        console.log("State: ", this.state)
-        this.dateFormatter()
+        console.log("State: ", this.state) 
         return (
             <div className="weather-container">
-                <h2>Weather Forecast</h2>
-                <h3>{this.state.timezone}</h3>
-                <h4>{}</h4>
+                <h2 className="weather-container-location">{this.state.timeZone}</h2>
+                <Time />
+                <h3>Summary: {this.state.currentData.summary}</h3>
+                <h3>Icon: {this.state.currentData.icon}</h3>
+                <h3>Temperature: {this.state.currentData.temperature}</h3>
             </div>
         );
     };
