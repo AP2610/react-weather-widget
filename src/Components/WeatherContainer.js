@@ -20,7 +20,7 @@ class WeatherContainer extends Component {
         fetch(url)
             .then(response => response.json())
             .then(response => {
-t                this.setState({
+                this.setState({
                     isLoaded: true,
                     timeZone: response.timezone,
                     currentData: response.currently 
