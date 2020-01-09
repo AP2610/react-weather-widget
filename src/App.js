@@ -1,9 +1,17 @@
-import React from "react";
+import React, {Component} from "react";
+import "./styles.css";
+import Header from "./Components/Header";
+import WeatherContainer from "./Components/WeatherContainer";
 
-class App extends React.Component {
+console.log(process.env.REACT_APP_API_KEY)
+
+class App extends Component {
   render() {
     return (
-        <h1>Weather Widget</h1>
+        <>
+            <Header />
+            <WeatherContainer />
+        </>
     );
   };
 };
