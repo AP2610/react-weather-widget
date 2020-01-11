@@ -2,11 +2,10 @@ import React from "react";
 import Moment from "react-moment";
 import "../styles.css";
 
-const Time = () => {
+const Time = (props) => {
     return (
         <>
-            <Moment className="weather-container-day" format='MMMM Do' /> <br />
-            <Moment className="weather-container-time" format='h:m A' />
+            <Moment className={props.className} date={props.date} format={props.format} /> <br />
         </>
     );
 };

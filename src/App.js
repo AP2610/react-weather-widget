@@ -6,10 +6,10 @@ import WeeklyWeatherContainer from "./components/WeeklyWeatherContainer";
 class App extends Component {
   render() {
     return (
-        <>
+        <div className="app-container">
             <Header />
             <WeeklyWeatherContainer />
-        </>
+        </div>
     );
   };
 };

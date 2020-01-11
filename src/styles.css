@@ -1,4 +1,51 @@
+/* Imported Fonts */
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+
+/* Generic Styles */
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+/* App container Styles */
+
+.app-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header Styles */
+
 h1 {
-    color: white;
-    background-color: black;
-  }
+  color: white;
+  background-color: black;
+  width: 100%;
+  text-align: center;
+}
+
+/* Weather Card Styles */
+
+.current-weather-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.current-weather-card-top {
+  text-align: center;
+}
+
+.current-weather-card-middle {
+  text-align: center;
+}
+
+.current-weather-card-bottom {
+  text-align: center;
+}
+
+
