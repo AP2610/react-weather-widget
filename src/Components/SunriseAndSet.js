@@ -5,9 +5,9 @@ import "../styles.css";
 const RiseAndSet = (props) => {
     return (
         <div className="weather-card-riseandset">
-            <h3>Sunrise: </h3>
+            <p>Sunrise: </p>
             <Time date={props.sunrise} format={props.format} />
-            <h3>Sunset: </h3>
+            <p>Sunset: </p>
             <Time date={props.sunset} format={props.format} />
         </div>
     );

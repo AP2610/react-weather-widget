@@ -26,11 +26,11 @@ const WeatherCard = (props) => {
                     className="current-weather-card-middle-icon"
                     source={props.iconSrc}
                 />
-                <h3 className="current-weather-card-middle-temp">Temperature: {props.currentTemperature}</h3>
+                <h4 className="current-weather-card-middle-temp"> {Math.round(props.currentTemperature)}°C</h4>
             </div>
             <div className="current-weather-card-bottom">
-                <h3 className="current-weather-card-bottom-summary">Summary: {props.currentSummary}</h3>
-                <h3 className="current-weather-card-bottom-feels">Feels like: {props.feelsLikeTemperature}</h3>
+                <p className="current-weather-card-bottom-feels">Feels like: {props.feelsLikeTemperature}</p>
+                <p className="current-weather-card-bottom-summary"> {props.currentSummary}</p>
             </div>
         </div>
     );
