@@ -5,6 +5,7 @@ const WeatherIcon = (props) => {
     return (
         <img
             src={props.source}
+            height={props.height}
         />
     )
 }

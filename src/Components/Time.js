@@ -6,6 +6,7 @@ const Time = (props) => {
     return (
         <>
             <Moment 
+                className={props.className} 
                 date={props.date} 
                 format={props.format} 
             />

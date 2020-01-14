@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faMapMarker} from "@fortawesome/free-solid-svg-icons";
 import Time from "./Time";
 import WeatherIcon from "./WeatherIcon";
 import "../styles.css";
@@ -7,14 +9,14 @@ const WeatherCard = (props) => {
     return (
         <div className="current-weather-card">
             <div className="current-weather-card-top">
-                <div>
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h2 className="current-weather-card-top-location">{props.timeZone}</h2>
+                <div className="current-weather-card-top-location">
+                    <FontAwesomeIcon icon={faMapMarker}/>
+                    <h2>{props.data.timeZone}</h2>
                 </div>
                 <div className="current-weather-card-top-date">
                     <Time
                         className="current-weather-card-date-day"
-                        date={props.date}
+                        date={new Date()}
                         format='ddd MMMM Do HH:mm'
                     />
                 </div>
@@ -22,13 +24,13 @@ const WeatherCard = (props) => {
             <div className="current-weather-card-middle">
                 <WeatherIcon
                     className="current-weather-card-middle-icon"
-                    source={props.iconSrc}
+                    source={`./icons/${props.data.currentData.icon}.svg`}
                 />
-                <h4 className="current-weather-card-middle-temp"> {Math.round(props.currentTemperature)}°</h4>
+                <h4 className="current-weather-card-middle-temp"> {Math.round(props.data.currentData.temperature)}°</h4>
             </div>
             <div className="current-weather-card-bottom">
-                <p className="current-weather-card-bottom-feels">Feels like: {Math.round(props.feelsLikeTemperature)}°</p>
-                <p className="current-weather-card-bottom-summary"> {props.currentSummary}</p>
+                <p className="current-weather-card-bottom-feels">Feels like: {Math.round(props.data.currentData.apparentTemperature)}°</p>
+                <p className="current-weather-card-bottom-summary"> {props.data.currentData.summary}</p>
             </div>
         </div>
     );

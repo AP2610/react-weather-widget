@@ -6,6 +6,7 @@
 body {
   font-family: "Raleway", sans-serif;
   color: #fff;
+  margin: 0;
   min-width: 100vw;
   min-height: 100vh;
   background: rgb(252, 120, 0);
@@ -54,6 +55,15 @@ h1 {
   align-items: center;
 }
 
+.current-weather-card-top-location {
+  display: flex;
+  align-items: center;
+}
+
+.current-weather-card-top-location > h2 {
+  margin-left: 10px;
+}
+
 .current-weather-card-date-time {
   margin-left: 3px;
 }
@@ -88,15 +98,15 @@ h1 {
 
 .rise-and-set {
   display: flex;
-  /* min-width: 70%; */
   justify-content: space-around;
   padding: 25px 5px;
   border-top: 1px solid #fff;
   border-bottom: 1px solid #fff;
   background-color: rgba(255, 255, 255, 0.2);
+  margin-top: 20px;
 }
 
-.rise-and-set-sunrise{
+.rise-and-set-sunrise {
   display: flex;
   align-items: flex-end;
 }
@@ -105,11 +115,53 @@ h1 {
   margin-left: 10px;
 }
 
-.rise-and-set-sunset{
+.rise-and-set-sunset {
   display: flex;
   align-items: flex-end;
 }
 
 .rise-and-set-sunset-time {
   margin-left: 10px;
+}
+
+/* Hourly data styles */
+
+.hourly-weather-container {
+  margin-top: 30px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  justify-content: flex-start;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  background-color: rgba(255, 255, 255, 0.2);
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.hourly-weather-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 95px;
+}
+
+#hourly-weather-card-time {
+  width: 50%;
+}
+
+.hourly-weather-card-temp {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.hourly-weather-card-rain {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  justify-content: space-around;
+  margin-top: -10px;
 }

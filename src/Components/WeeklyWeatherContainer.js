@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import APIHelper from "../helpers/apiHelper";
 import WeatherCard from "./WeatherCard";
 import RiseAndSet from "./SunriseAndSet";
+import { LoadingSpinner } from "./Loader";
+import HourlyWeather from "./HourlyWeather";
 import "../styles.css";
 
 class WeeklyWeatherContainer extends Component {
@@ -24,9 +26,9 @@ class WeeklyWeatherContainer extends Component {
         // Fetching the data using a helper class to abstract fetch logic
         const API = new APIHelper();
         API.setBaseUrl("https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/");
-        API.get(`/${key}/${lat},${long}?units=${unit}`)
+        API.getWithHeaders(`/${key}/${lat},${long}?units=${unit}`)
             .then(data => {
-                // console.log(data)
+                // console.log("API data: ", data)
                 this.setState({
                     isLoaded: true,
                     timeZone: data.timezone,
@@ -36,47 +38,56 @@ class WeeklyWeatherContainer extends Component {
                     dailyData: data.daily.data
                 })
             }).catch(error => {
-                alert("Sorry, it seems like there was an error retreiving the weather information. Please try again later!")
                 console.log("Sorry, there was an error: ", error)
+                alert("Sorry, it seems like there was an error retreiving the weather information. Please try again later!")
             });
     };
 
-    // formatTime = (timestamp) => {
-    //     const date = new Date(timestamp * 1000);
-    //     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    //     const dayName = days[date.getDay()];
-    //     const hours = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
-    //     const minutes = date.getMinutes()
-    //     const time = `${hours}:${minutes}`
-    //     return {
-    //         dayName,
-    //         hours,
-    //         minutes,
-    //         time
-    //     }
-    // }
+    getFormattedHourlyData = () => {
+        const hourlyData = this.state.hourlyData;
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        tomorrow.setHours(18, 0, 0, 0);
+        const biHourlyData = [];
+        for (let i = 1; i < hourlyData.length; i += 2) {
+            if ((new Date(hourlyData[i].time * 1000)) <= tomorrow) {
+                biHourlyData.push(hourlyData[i])
+            }
+        }
+        return biHourlyData;
+    };
 
     render() {
-        console.log("State: ", this.state)
-        const sunrise = new Date(this.state.todaysData.sunriseTime * 1000)
-        const sunset = new Date(this.state.todaysData.sunsetTime * 1000)
-        return (
-            <div className="weekly-weather-container">
-                <WeatherCard
-                    timeZone={this.state.timeZone}
-                    date={new Date()}
-                    iconSrc={`./icons/${this.state.currentData.icon}.svg`}
-                    currentTemperature={this.state.currentData.temperature}
-                    currentSummary={this.state.currentData.summary}
-                    feelsLikeTemperature={this.state.currentData.apparentTemperature}
-                />
-                <RiseAndSet
-                    sunrise={sunrise}
-                    sunset={sunset}
-                    format="HH:mm"
-                />
-            </div>
-        );
+        console.log("State: ", this.state);
+        const riseAndSetTimes = {
+            sunrise: new Date(this.state.todaysData.sunriseTime * 1000),
+            sunset: new Date(this.state.todaysData.sunsetTime * 1000)
+        };
+        const hourlyWeather = this.getFormattedHourlyData().map(weather => <HourlyWeather key={weather.time} data={weather} />);
+
+        if (this.state.isLoaded) {
+            return (
+                <div className="weekly-weather-container">
+                    <WeatherCard data={this.state} />
+                    <RiseAndSet data={riseAndSetTimes} />
+                    <div className="hourly-weather-container">
+                        {hourlyWeather}
+                    </div>
+                    <div>
+                        <h3>Daily Data:</h3>
+                    </div>
+                </div>
+            );
+        }
+        else {
+            return (
+                <div className="loading-spinner">
+                    <LoadingSpinner />
+                    <h3>Loading...</h3>
+                </div>
+            )
+        };
     };
 };
 

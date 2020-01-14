@@ -20,7 +20,7 @@ export default class APIHelper {
         const url = this.baseUrl + endPoint;
         const apiCall = fetch(url, {
             headers: {
-                'Accept-Encoding': 'gzip'
+                'Accept-Encoding': 'gzip',
             }
         }).then(response => response.json())
         return apiCall;

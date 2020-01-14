@@ -10,16 +10,16 @@ const RiseAndSet = (props) => {
                 <WeatherIcon source="./icons/sunrise.svg"/>
                 <Time
                     className="rise-and-set-sunrise-time"
-                    date={props.sunrise}
-                    format={props.format}
+                    date={props.data.sunrise}
+                    format="HH:mm"
                 />
             </div>
             <div className="rise-and-set-sunset">
                 <WeatherIcon source="./icons/sunset.svg"/>
                 <Time
                     className="rise-and-set-sunset-time"
-                    date={props.sunset}
-                    format={props.format}
+                    date={props.data.sunset}
+                    format="HH:mm"
                 />
             </div>
         </div>
