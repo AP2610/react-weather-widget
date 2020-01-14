@@ -36,6 +36,10 @@ h1 {
   text-align: center;
 }
 
+.weekly-weather-container {
+  min-width: 100vw;
+}
+
 /* Weather Card Styles */
 
 .current-weather-card {
@@ -50,10 +54,15 @@ h1 {
   align-items: center;
 }
 
+.current-weather-card-date-time {
+  margin-left: 3px;
+}
+
 .current-weather-card-middle {
   display: flex;
   align-items: center;
-  min-width: 160px;
+  min-width: 185px;
+  position: relative;
 }
 
 .current-weather-card-middle-temp {
@@ -62,8 +71,45 @@ h1 {
   margin: 0;
 }
 
+#current-weather-card-middle-degrees {
+  position: absolute;
+  right: 25px;
+  top: 30px;
+}
+
 .current-weather-card-bottom {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-weight: bolder;
+}
+
+/* Sunrise and sunset time styles */
+
+.rise-and-set {
+  display: flex;
+  /* min-width: 70%; */
+  justify-content: space-around;
+  padding: 25px 5px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.rise-and-set-sunrise{
+  display: flex;
+  align-items: flex-end;
+}
+
+.rise-and-set-sunrise-time {
+  margin-left: 10px;
+}
+
+.rise-and-set-sunset{
+  display: flex;
+  align-items: flex-end;
+}
+
+.rise-and-set-sunset-time {
+  margin-left: 10px;
 }

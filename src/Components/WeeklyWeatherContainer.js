@@ -61,7 +61,7 @@ class WeeklyWeatherContainer extends Component {
         const sunrise = new Date(this.state.todaysData.sunriseTime * 1000)
         const sunset = new Date(this.state.todaysData.sunsetTime * 1000)
         return (
-            <>
+            <div className="weekly-weather-container">
                 <WeatherCard
                     timeZone={this.state.timeZone}
                     date={new Date()}
@@ -75,7 +75,7 @@ class WeeklyWeatherContainer extends Component {
                     sunset={sunset}
                     format="HH:mm"
                 />
-            </>
+            </div>
         );
     };
 };

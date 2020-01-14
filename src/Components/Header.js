@@ -4,7 +4,7 @@ import "../styles.css";
 const Header = () => {
     return (
         <>
-            <h1>Weather Widget</h1>
+            <h1></h1>
         </>
     )
 }
