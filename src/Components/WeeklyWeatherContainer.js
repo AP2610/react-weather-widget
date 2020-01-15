@@ -111,7 +111,6 @@ class WeeklyWeatherContainer extends Component {
 
         // Mapping from getDailyWeather to render array of components
         const dailyWeather = this.getDailyWeather().map(weather => <DailyWeather key={weather.time} data={weather} />);
-        console.log("Daily: ", dailyWeather)
 
         // Renders the Weather Widget only if isLoaded is true (i.e. API has responded 200 with data). Otherwise, renders a loading spinner.
         if (this.state.isLoaded) {

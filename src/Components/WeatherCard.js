@@ -11,7 +11,7 @@ const WeatherCard = (props) => {
             <div className="current-weather-card-top">
                 <div className="current-weather-card-top-location">
                     <FontAwesomeIcon icon={faMapMarker}/>
-                    <h2>{props.data.timeZone}</h2>
+                    <h3>{props.data.timeZone}</h3>
                 </div>
                 <div className="current-weather-card-top-date">
                     <Time
