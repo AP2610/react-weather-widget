@@ -116,7 +116,7 @@ class WeeklyWeatherContainer extends Component {
         // Renders the Weather Widget only if isLoaded is true (i.e. API has responded 200 with data). Otherwise, renders a loading spinner.
         if (this.state.isLoaded) {
             return (
-                <div className="weekly-weather-container">
+                <div className="weekly-weather-container animated-fade-in">
                     <WeatherCard data={this.state} />
                     <RiseAndSet data={riseAndSetTimes} />
                     <div className="hourly-weather-container">

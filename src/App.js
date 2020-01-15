@@ -7,7 +7,7 @@ import "./styles.css";
 class App extends Component {
   render() {
     return (
-        <div className="app-container">
+        <div className="app-container animated-fade-in">
             <Header />
             <WeeklyWeatherContainer />
             <Footer />
