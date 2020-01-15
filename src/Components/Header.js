@@ -3,9 +3,8 @@ import "../styles.css";
 
 const Header = () => {
     return (
-        <>
-            <button></button>
-        </>
+        <div className="app-header">
+        </div>
     )
 }
 

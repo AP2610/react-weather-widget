@@ -14,6 +14,7 @@ class WeeklyWeatherContainer extends Component {
         super();
         this.state = {
             isLoaded: false,
+            farenheit: false,
             timeZone: "",
             currentData: {},
             todaysData: {},
@@ -47,7 +48,7 @@ class WeeklyWeatherContainer extends Component {
     componentDidMount = () => {
         // Default API parameters
         const { lat, long, key, unit } = { lat: 52.370216, long: 4.895168, key: APIKEY, unit: "auto" };
-        
+
         // Options to pass as 3rd argument to getCurrentPosition()
         const options = {
             enableHighAccuracy: true,
@@ -94,9 +95,19 @@ class WeeklyWeatherContainer extends Component {
     // A function to manipulate the daily data array returned from the API. The first element is the current day, so splic is used to exclude this. The returned array will be mapped to a DailyWeather component. 
     getDailyWeather = () => {
         const dailyData = this.state.dailyData;
-        dailyData.splice(0, 1);
-        return dailyData;
+        const formattedDailyData = dailyData.slice(1, dailyData.length)
+        return formattedDailyData;
     };
+
+    handleClick = () => {
+        console.log("Clicked!")
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                farenheit: !prevState.farenheit
+            }
+        })
+    }
 
     render() {
         console.log("State: ", this.state);
@@ -107,16 +118,22 @@ class WeeklyWeatherContainer extends Component {
             sunset: new Date(this.state.todaysData.sunsetTime * 1000)
         };
         // Mapping from getHourlyWeather to render array of components
-        const hourlyWeather = this.getHourlyWeather().map(weather => <HourlyWeather key={weather.time} data={weather} />);
+        const hourlyWeather = this.getHourlyWeather().map(weather => <HourlyWeather key={weather.time} data={weather} farenheit={this.state.farenheit}/>);
 
         // Mapping from getDailyWeather to render array of components
-        const dailyWeather = this.getDailyWeather().map(weather => <DailyWeather key={weather.time} data={weather} />);
+        const dailyWeather = this.getDailyWeather().map(weather => <DailyWeather key={weather.time} data={weather} farenheit={this.state.farenheit}/>);
 
         // Renders the Weather Widget only if isLoaded is true (i.e. API has responded 200 with data). Otherwise, renders a loading spinner.
         if (this.state.isLoaded) {
             return (
                 <div className="weekly-weather-container animated-fade-in">
-                    <WeatherCard data={this.state} />
+                    <div className="buttons">
+                        <button type="button" onClick={this.handleClick}>Farenheit</button>
+                    </div>
+                    <WeatherCard
+                        data={this.state}
+                        farenheit={this.state.farenheit}
+                    />
                     <RiseAndSet data={riseAndSetTimes} />
                     <div className="hourly-weather-container">
                         {hourlyWeather}

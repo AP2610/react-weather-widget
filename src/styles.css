@@ -43,7 +43,9 @@ svg {
 }
 
 .flex-column {
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* App container Styles */
@@ -72,29 +74,19 @@ svg {
 }
 /* Header Styles */
 
-h1 {
-  color: white;
-  width: 100%;
-  text-align: center;
+.app-header {
+  padding: 10px 0px;
+  margin: 10px 0px;
 }
+
+/* Weekly container styles */
 
 .weekly-weather-container {
   width: 100%;
+  margin: 10px 0px;
 }
 
 /* Weather Card Styles */
-
-.current-weather-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.current-weather-card-top {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .current-weather-card-top-location {
   display: flex;
@@ -248,13 +240,14 @@ h1 {
     border: 1px solid #fff;
     border-radius: 5px;
     box-shadow: 1px 20px 40px rgba(0, 0, 0, 0.3);
-    transition: all 2s;
+    transition: all 3s;
   }
   .weekly-weather-container:hover {
     box-shadow: 1px 20px 40px rgba(0, 0, 0, 0.8);
-    transition: all 2s;
+    transition: all 1s;
   }
   .hourly-weather-container:hover {
     background-color: rgba(252, 120, 0, 0.8);
+    transition: all 1s;
   }
 }

@@ -22,8 +22,8 @@ const DailyWeather = (props) => {
                 <p>{Math.round(props.data.precipProbability * 100)}%</p>
             </div>
             <div className="daily-weather-card-temp">
-                <p>{Math.round(props.data.temperatureMax)}°</p>
-                <p>{Math.round(props.data.temperatureMin)}°</p>
+                <p>{props.farenheit ? Math.round(props.data.temperatureMax * 1.8 + 32) : Math.round(props.data.temperatureMax)}°</p>
+                <p>{props.farenheit ? Math.round(props.data.temperatureMin * 1.8 + 32) : Math.round(props.data.temperatureMin)}°</p>
             </div>
         </div>
     )

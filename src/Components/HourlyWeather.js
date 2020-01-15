@@ -18,7 +18,7 @@ const HourlyWeather = (props) => {
                     source={`./icons/${props.data.icon}.svg`}
                     height="40px"
                 />
-                <p>{Math.round(props.data.temperature)}°</p>
+                <p>{props.farenheit ? Math.round(props.data.temperature * 1.8 + 32) : Math.round(props.data.temperature)}°</p>
             </div>
             <div className="hourly-weather-card-rain">
                 <FontAwesomeIcon icon={faTint} />
