@@ -5,7 +5,8 @@ import "../styles.css";
 const Time = (props) => {
     return (
         <>
-            <Moment 
+            <Moment
+                id="time"
                 className={props.className} 
                 date={props.date} 
                 format={props.format} 

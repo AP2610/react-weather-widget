@@ -43,7 +43,7 @@ class WeeklyWeatherContainer extends Component {
             });
     };
 
-    getFormattedHourlyData = () => {
+    getHourlyWeather = () => {
         const hourlyData = this.state.hourlyData;
         const today = new Date();
         const tomorrow = new Date(today);
@@ -58,13 +58,19 @@ class WeeklyWeatherContainer extends Component {
         return biHourlyData;
     };
 
+    getDailyWeather = () => {
+        const dailyData = this.state.dailyData;
+        return dailyData;
+    }
+
     render() {
         console.log("State: ", this.state);
+        console.log("Daily Data: ", this.getDailyWeather())
         const riseAndSetTimes = {
             sunrise: new Date(this.state.todaysData.sunriseTime * 1000),
             sunset: new Date(this.state.todaysData.sunsetTime * 1000)
         };
-        const hourlyWeather = this.getFormattedHourlyData().map(weather => <HourlyWeather key={weather.time} data={weather} />);
+        const hourlyWeather = this.getHourlyWeather().map(weather => <HourlyWeather key={weather.time} data={weather} />);
 
         if (this.state.isLoaded) {
             return (

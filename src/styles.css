@@ -1,10 +1,18 @@
 /* Imported Fonts */
 @import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
 /* Generic Styles */
 
-body {
+h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
+}
+
+#time, p {
+  font-family: 'Muli', sans-serif;
+}
+
+body {
   color: #fff;
   margin: 0;
   min-width: 100vw;
