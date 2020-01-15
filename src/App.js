@@ -1,7 +1,8 @@
 import React, {Component} from "react";
-import "./styles.css";
 import Header from "./components/Header";
 import WeeklyWeatherContainer from "./components/WeeklyWeatherContainer";
+import Footer from "./components/Footer";
+import "./styles.css";
 
 class App extends Component {
   render() {
@@ -9,6 +10,7 @@ class App extends Component {
         <div className="app-container">
             <Header />
             <WeeklyWeatherContainer />
+            <Footer />
         </div>
     );
   };

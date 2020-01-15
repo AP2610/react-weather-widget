@@ -4,6 +4,7 @@ dist/bundle.js
 node_modules/
 *.log
 .env
+src/helpers/apiKey.js
 
 # OS generated files
 .DS_Store

@@ -4,10 +4,12 @@ import WeatherCard from "./WeatherCard";
 import RiseAndSet from "./SunriseAndSet";
 import HourlyWeather from "./HourlyWeather";
 import DailyWeather from "./DailyWeather";
+import { APIKEY } from "../helpers/apiKey";
 import { LoadingSpinner } from "./Loader";
 import "../styles.css";
 
 class WeeklyWeatherContainer extends Component {
+    // Initializes state with empty objects and arrays to popularte relevant API data
     constructor() {
         super();
         this.state = {
@@ -20,11 +22,9 @@ class WeeklyWeatherContainer extends Component {
         }
     };
 
-    componentDidMount = () => {
-        // API parameters
-        const { lat, long, key, unit } = { lat: 52.370216, long: 4.895168, key: "78ddbb0eef728d7c015c7f1e66d4a626", unit: "auto" };
-
-        // Fetching the data using a helper class to abstract fetch logic
+    // This function is called within componentDidMount to retrieve API data based on user location. It also sets state. This function is called multiple times within componentDidMount hence the abstraction. 
+    fetchData = (lat, long, key, unit) => {
+        // Fetching the API data using a helper class to abstract fetch logic
         const API = new APIHelper();
         API.setBaseUrl("https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/");
         API.getWithHeaders(`/${key}/${lat},${long}?units=${unit}`)
@@ -42,6 +42,36 @@ class WeeklyWeatherContainer extends Component {
                 console.log("Sorry, there was an error: ", error)
                 alert("Sorry, it seems like there was an error retreiving the weather information. Please try again later!")
             });
+    };
+
+    componentDidMount = () => {
+        // Default API parameters
+        const { lat, long, key, unit } = { lat: 52.370216, long: 4.895168, key: APIKEY, unit: "auto" };
+        
+        // Options to pass as 3rd argument to getCurrentPosition()
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 3000
+        };
+        // Only if the browser has this web API will we retrieve user location and subsequently use it to fetch data. If permission is denied, or request times out, fetchData() takes the default parameters.
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(data => {
+                console.log("Location permission granted")
+                const myLat = data.coords.latitude
+                const myLong = data.coords.longitude
+                this.fetchData(myLat, myLong, key, unit)
+            },
+                (error) => {
+                    if (error.code === error.PERMISSION_DENIED || error.code === error.TIMEOUT) {
+                        console.log("Location permission denied or the request timed out")
+                        this.fetchData(lat, long, key, unit)
+                    };
+                },
+                options
+            );
+        } else {
+            this.fetchData(lat, long, key, unit)
+        };
     };
 
     // A function to format api-returned hourly data so that we end up with an array with 2-hour intervals of our api-returened hourly data. Also to format the array from 48-hour data to only until tomorrow 18:00. The returned array will be mapped to a hourlyWeather component.
@@ -70,6 +100,7 @@ class WeeklyWeatherContainer extends Component {
 
     render() {
         console.log("State: ", this.state);
+
         // Sets rise and set times to be passes to RiseAndSet component
         const riseAndSetTimes = {
             sunrise: new Date(this.state.todaysData.sunriseTime * 1000),
@@ -79,7 +110,7 @@ class WeeklyWeatherContainer extends Component {
         const hourlyWeather = this.getHourlyWeather().map(weather => <HourlyWeather key={weather.time} data={weather} />);
 
         // Mapping from getDailyWeather to render array of components
-        const dailyWeather = this.getDailyWeather().map(weather => <DailyWeather key={weather.time} data={weather}/>);
+        const dailyWeather = this.getDailyWeather().map(weather => <DailyWeather key={weather.time} data={weather} />);
         console.log("Daily: ", dailyWeather)
 
         // Renders the Weather Widget only if isLoaded is true (i.e. API has responded 200 with data). Otherwise, renders a loading spinner.
@@ -92,7 +123,7 @@ class WeeklyWeatherContainer extends Component {
                         {hourlyWeather}
                     </div>
                     <div className="daily-weather-container">
-                        {dailyWeather} 
+                        {dailyWeather}
                     </div>
                 </div>
             );
