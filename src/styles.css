@@ -6,14 +6,19 @@
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
+  color: #fff;
 }
 
 #time, p {
   font-family: 'Muli', sans-serif;
+  color: #fff;
+}
+
+svg {
+  color: #fff;
 }
 
 body {
-  color: #fff;
   margin: 0;
   min-width: 100vw;
   min-height: 100vh;
@@ -169,7 +174,7 @@ h1 {
 .hourly-weather-card-rain {
   display: flex;
   align-items: center;
-  width: 50%;
+  width: 60%;
   justify-content: space-around;
   margin-top: -10px;
 }

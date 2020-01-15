@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import APIHelper from "../helpers/apiHelper";
 import WeatherCard from "./WeatherCard";
 import RiseAndSet from "./SunriseAndSet";
-import { LoadingSpinner } from "./Loader";
 import HourlyWeather from "./HourlyWeather";
+import DailyWeather from "./DailyWeather";
+import { LoadingSpinner } from "./Loader";
 import "../styles.css";
 
 class WeeklyWeatherContainer extends Component {
@@ -14,8 +15,8 @@ class WeeklyWeatherContainer extends Component {
             timeZone: "",
             currentData: {},
             todaysData: {},
-            hourlyData: {},
-            dailyData: {}
+            hourlyData: [],
+            dailyData: []
         }
     };
 
@@ -43,6 +44,7 @@ class WeeklyWeatherContainer extends Component {
             });
     };
 
+    // A function to format api-returned hourly data so that we end up with an array with 2-hour intervals of our api-returened hourly data. Also to format the array from 48-hour data to only until tomorrow 18:00. The returned array will be mapped to a hourlyWeather component.
     getHourlyWeather = () => {
         const hourlyData = this.state.hourlyData;
         const today = new Date();
@@ -51,6 +53,7 @@ class WeeklyWeatherContainer extends Component {
         tomorrow.setHours(18, 0, 0, 0);
         const biHourlyData = [];
         for (let i = 1; i < hourlyData.length; i += 2) {
+            // The API returns hourly-data for 48 hours. I only want data from the following hour, to 18:00 tomorrow. If the time of the given array element is less than "tomorrow", add it to our biHourly array.
             if ((new Date(hourlyData[i].time * 1000)) <= tomorrow) {
                 biHourlyData.push(hourlyData[i])
             }
@@ -58,20 +61,28 @@ class WeeklyWeatherContainer extends Component {
         return biHourlyData;
     };
 
+    // A function to manipulate the daily data array returned from the API. The first element is the current day, so splic is used to exclude this. The returned array will be mapped to a DailyWeather component. 
     getDailyWeather = () => {
         const dailyData = this.state.dailyData;
+        dailyData.splice(0, 1);
         return dailyData;
-    }
+    };
 
     render() {
         console.log("State: ", this.state);
-        console.log("Daily Data: ", this.getDailyWeather())
+        // Sets rise and set times to be passes to RiseAndSet component
         const riseAndSetTimes = {
             sunrise: new Date(this.state.todaysData.sunriseTime * 1000),
             sunset: new Date(this.state.todaysData.sunsetTime * 1000)
         };
+        // Mapping from getHourlyWeather to render array of components
         const hourlyWeather = this.getHourlyWeather().map(weather => <HourlyWeather key={weather.time} data={weather} />);
 
+        // Mapping from getDailyWeather to render array of components
+        const dailyWeather = this.getDailyWeather().map(weather => <DailyWeather key={weather.time} data={weather}/>);
+        console.log("Daily: ", dailyWeather)
+
+        // Renders the Weather Widget only if isLoaded is true (i.e. API has responded 200 with data). Otherwise, renders a loading spinner.
         if (this.state.isLoaded) {
             return (
                 <div className="weekly-weather-container">
@@ -80,8 +91,8 @@ class WeeklyWeatherContainer extends Component {
                     <div className="hourly-weather-container">
                         {hourlyWeather}
                     </div>
-                    <div>
-                        <h3>Daily Data:</h3>
+                    <div className="daily-weather-container">
+                        {dailyWeather} 
                     </div>
                 </div>
             );
