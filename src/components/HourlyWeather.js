@@ -17,6 +17,7 @@ const HourlyWeather = (props) => {
                 <WeatherIcon 
                     source={`./icons/${props.data.icon}.svg`}
                     height="40px"
+                    alt={`${props.data.icon} Icon`}
                 />
                 <p>{props.farenheit ? Math.round(props.data.temperature * 1.8 + 32) : Math.round(props.data.temperature)}°</p>
             </div>

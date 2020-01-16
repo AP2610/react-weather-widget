@@ -7,7 +7,10 @@ const RiseAndSet = (props) => {
     return (
         <div className="rise-and-set">
             <div className="flex-flex-end">
-                <WeatherIcon source="./icons/sunrise.svg"/>
+                <WeatherIcon 
+                    source="./icons/sunrise.svg"
+                    alt="sunrise ccon"
+                />
                 <Time
                     className="rise-and-set-sunrise-time"
                     date={props.data.sunrise}
@@ -15,7 +18,10 @@ const RiseAndSet = (props) => {
                 />
             </div>
             <div className="flex-flex-end">
-                <WeatherIcon source="./icons/sunset.svg"/>
+                <WeatherIcon 
+                    source="./icons/sunset.svg"
+                    alt="sunset icon"
+                />
                 <Time
                     className="rise-and-set-sunset-time"
                     date={props.data.sunset}

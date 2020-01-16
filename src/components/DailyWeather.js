@@ -16,6 +16,7 @@ const DailyWeather = (props) => {
             <WeatherIcon
                 source={`./icons/${props.data.icon}.svg`}
                 height="50px"
+                alt={`${props.data.icon} icon`}
             />
             <div className="daily-weather-card-rain flex-center-spacebetween">
                 <FontAwesomeIcon icon={faTint} />

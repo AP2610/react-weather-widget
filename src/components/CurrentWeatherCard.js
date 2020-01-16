@@ -25,6 +25,7 @@ const CurrentWeatherCard = (props) => {
                 <WeatherIcon
                     className="current-weather-card-middle-icon"
                     source={`./icons/${props.data.currentData.icon}.svg`}
+                    alt={`${props.data.currentData.icon} icon`}
                 />
                 <h4 className="current-weather-card-middle-temp"> {props.farenheit? Math.round(props.data.currentData.temperature* 1.8 + 32) : Math.round(props.data.currentData.temperature)}°</h4>
             </div>
