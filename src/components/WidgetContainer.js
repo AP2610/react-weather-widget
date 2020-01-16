@@ -25,7 +25,7 @@ class WidgetContainer extends Component {
         }
     };
 
-    // This function is called within componentDidMount to retrieve API data based on user location. It also sets state. This function is called multiple times within componentDidMount hence the abstraction. 
+    // This function is called within componentDidMount to retrieve API data based on user location. It also sets state. This function is called multiple times within componentDidMount hence the abstraction
     fetchData = (lat, long, key, unit) => {
         // Fetching the API data using a helper class to abstract fetch logic
         const API = new APIHelper();
