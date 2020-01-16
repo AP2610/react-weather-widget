@@ -4,6 +4,7 @@ import WeatherCard from "./WeatherCard";
 import RiseAndSet from "./SunriseAndSet";
 import HourlyWeather from "./HourlyWeather";
 import DailyWeather from "./DailyWeather";
+import Buttons from "./Button";
 import { APIKEY } from "../helpers/apiKey";
 import { LoadingSpinner } from "./Loader";
 import "../styles.css";
@@ -15,6 +16,7 @@ class WeeklyWeatherContainer extends Component {
         this.state = {
             isLoaded: false,
             farenheit: false,
+            darkMode: false,
             timeZone: "",
             currentData: {},
             todaysData: {},
@@ -47,7 +49,7 @@ class WeeklyWeatherContainer extends Component {
 
     componentDidMount = () => {
         // Default API parameters
-        const { lat, long, key, unit } = { lat: 52.370216, long: 4.895168, key: APIKEY, unit: "auto" };
+        const { lat, long, key, unit } = { lat: 52.370216, long: 4.895168, key: APIKEY, unit: "si" };
 
         // Options to pass as 3rd argument to getCurrentPosition()
         const options = {
@@ -99,37 +101,53 @@ class WeeklyWeatherContainer extends Component {
         return formattedDailyData;
     };
 
-    handleClick = () => {
-        console.log("Clicked!")
-        this.setState(prevState => {
-            return {
-                ...prevState,
-                farenheit: !prevState.farenheit
-            }
-        })
-    }
+    handleClick = (e) => {
+        if (e.target.matches("#button-unit")) {
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    farenheit: !prevState.farenheit
+                };
+            });
+        } else {
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    darkMode: !prevState.darkMode
+                };
+            });
+        };
+    };
 
     render() {
-        console.log("State: ", this.state);
-
         // Sets rise and set times to be passes to RiseAndSet component
         const riseAndSetTimes = {
             sunrise: new Date(this.state.todaysData.sunriseTime * 1000),
             sunset: new Date(this.state.todaysData.sunsetTime * 1000)
         };
         // Mapping from getHourlyWeather to render array of components
-        const hourlyWeather = this.getHourlyWeather().map(weather => <HourlyWeather key={weather.time} data={weather} farenheit={this.state.farenheit}/>);
+        const hourlyWeather = this.getHourlyWeather().map(weather => <HourlyWeather key={weather.time} data={weather} farenheit={this.state.farenheit} />);
 
         // Mapping from getDailyWeather to render array of components
-        const dailyWeather = this.getDailyWeather().map(weather => <DailyWeather key={weather.time} data={weather} farenheit={this.state.farenheit}/>);
+        const dailyWeather = this.getDailyWeather().map(weather => <DailyWeather key={weather.time} data={weather} farenheit={this.state.farenheit} />);
+
+        if (this.state.darkMode) {
+            document.body.classList.add('dark-mode')
+        } else {
+            document.body.classList.remove('dark-mode')
+        }
+        // style={this.state.darkMode ? { backgroundColor: "#000" } : { backgroundColor: "initial" }}
 
         // Renders the Weather Widget only if isLoaded is true (i.e. API has responded 200 with data). Otherwise, renders a loading spinner.
         if (this.state.isLoaded) {
             return (
                 <div className="weekly-weather-container animated-fade-in">
-                    <div className="buttons">
-                        <button type="button" onClick={this.handleClick}>Farenheit</button>
-                    </div>
+                    <Buttons
+                        handleClick={this.handleClick}
+                        toggleDarkMode={this.toggleDarkMode}
+                        farenheit={this.state.farenheit}
+                        darkMode={this.state.darkMode}
+                    />
                     <WeatherCard
                         data={this.state}
                         farenheit={this.state.farenheit}

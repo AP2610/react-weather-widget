@@ -10,7 +10,7 @@ html {
 
 body {
   margin: 0;
-  min-width: 100vw;
+  width: 100vw;
   min-height: 100%;
   background: rgb(252, 120, 0);
   background: linear-gradient(
@@ -20,6 +20,18 @@ body {
   );
   background-repeat: no-repeat;
   background-attachment: fixed;
+  transition: all 2s;
+}
+
+.dark-mode {
+  background: linear-gradient(
+    160deg,
+    rgba(0, 0, 0, 1) 15%,
+    rgba(64, 0, 149, 1) 79%
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: all 2s;
 }
 
 h1,
@@ -48,6 +60,23 @@ svg {
   align-items: center;
 }
 
+.flex-flex-end {
+  display: flex;
+  align-items: flex-end;
+}
+
+.flex-center-spacearound {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.flex-center-spacebetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 /* App container Styles */
 
 .app-container {
@@ -60,7 +89,7 @@ svg {
   align-items: center;
 }
 
-.animated-fade-in{
+.animated-fade-in {
   animation: fadein 3s;
 }
 
@@ -72,18 +101,18 @@ svg {
     opacity: 1;
   }
 }
-/* Header Styles */
-
-.app-header {
-  padding: 10px 0px;
-  margin: 10px 0px;
-}
 
 /* Weekly container styles */
 
 .weekly-weather-container {
   width: 100%;
-  margin: 10px 0px;
+  padding: 30px 0px;
+}
+
+/* Loading spinner styles */
+
+.loading-spinner {
+  padding: 30px 0px;
 }
 
 /* Weather Card Styles */
@@ -121,9 +150,6 @@ svg {
 }
 
 .current-weather-card-bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   font-weight: bolder;
 }
 
@@ -139,18 +165,8 @@ svg {
   margin-top: 20px;
 }
 
-.rise-and-set-sunrise {
-  display: flex;
-  align-items: flex-end;
-}
-
 .rise-and-set-sunrise-time {
   margin-left: 10px;
-}
-
-.rise-and-set-sunset {
-  display: flex;
-  align-items: flex-end;
 }
 
 .rise-and-set-sunset-time {
@@ -164,8 +180,8 @@ svg {
   padding-top: 10px;
   display: flex;
   flex-direction: row;
-  width: 100%;
   justify-content: flex-start;
+  width: 100%;
   border-top: 1px solid #fff;
   border-bottom: 1px solid #fff;
   background-color: rgba(255, 255, 255, 0.2);
@@ -175,9 +191,6 @@ svg {
 }
 
 .hourly-weather-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   min-width: 95px;
 }
 
@@ -192,10 +205,7 @@ svg {
 }
 
 .hourly-weather-card-rain {
-  display: flex;
-  align-items: center;
   width: 60%;
-  justify-content: space-around;
   margin-top: -10px;
 }
 
@@ -209,28 +219,44 @@ svg {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.daily-weather-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .daily-weather-card-day {
   width: 60px;
 }
 
 .daily-weather-card-rain {
-  display: flex;
-  align-items: center;
   width: 60px;
-  justify-content: space-between;
 }
 
 .daily-weather-card-temp {
-  display: flex;
-  align-items: center;
   width: 60px;
-  justify-content: space-around;
+}
+
+/* Button styles */
+
+.buttons {
+  padding: 10px;
+}
+
+.button-top {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid #fff;
+  padding: 5px 10px;
+  border-radius: 3px;
+  width: 60px;
+  color: #ececec;
+  box-shadow: 1px 5px 6px rgba(0, 0, 0, 0.3);
+  transition: all 1s;
+}
+
+.button-top:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  box-shadow: 1px 5px 6px rgba(0, 0, 0, 0.8);
+  transition: all 1s;
+}
+
+.button-top:focus {
+  outline: none;
 }
 
 /* Responsive styles */
@@ -241,6 +267,7 @@ svg {
     border-radius: 5px;
     box-shadow: 1px 20px 40px rgba(0, 0, 0, 0.3);
     transition: all 3s;
+    margin: 30px 0px;
   }
   .weekly-weather-container:hover {
     box-shadow: 1px 20px 40px rgba(0, 0, 0, 0.8);

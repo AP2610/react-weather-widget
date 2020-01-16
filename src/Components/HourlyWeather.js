@@ -7,7 +7,7 @@ import "../styles.css";
 
 const HourlyWeather = (props) => {
     return (
-        <div className="hourly-weather-card">
+        <div className="hourly-weather-card flex-column">
             <Time
                 id="hourly-weather-card-time"
                 date={new Date(props.data.time * 1000)}
@@ -20,7 +20,7 @@ const HourlyWeather = (props) => {
                 />
                 <p>{props.farenheit ? Math.round(props.data.temperature * 1.8 + 32) : Math.round(props.data.temperature)}°</p>
             </div>
-            <div className="hourly-weather-card-rain">
+            <div className="hourly-weather-card-rain flex-center-spacearound">
                 <FontAwesomeIcon icon={faTint} />
                 <p>{Math.round(props.data.precipProbability * 100)}%</p>
             </div>

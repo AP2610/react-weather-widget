@@ -28,7 +28,7 @@ const WeatherCard = (props) => {
                 />
                 <h4 className="current-weather-card-middle-temp"> {props.farenheit? Math.round(props.data.currentData.temperature* 1.8 + 32) : Math.round(props.data.currentData.temperature)}°</h4>
             </div>
-            <div className="current-weather-card-bottom">
+            <div className="current-weather-card-bottom flex-column">
                 <p className="current-weather-card-bottom-feels">Feels like: {props.farenheit ? Math.round(props.data.currentData.apparentTemperature * 1.8 + 32) :  Math.round(props.data.currentData.apparentTemperature)}°</p>
                 <p className="current-weather-card-bottom-summary"> {props.data.currentData.summary}</p>
             </div>
