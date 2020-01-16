@@ -5,7 +5,7 @@ import Time from "./Time";
 import WeatherIcon from "./WeatherIcon";
 import "../styles.css";
 
-const WeatherCard = (props) => {
+const CurrentWeatherCard = (props) => {
     return (
         <div className="current-weather-card flex-column">
             <div className="current-weather-card-top flex-column">
@@ -36,4 +36,4 @@ const WeatherCard = (props) => {
     );
 };
 
-export default WeatherCard;
+export default CurrentWeatherCard;

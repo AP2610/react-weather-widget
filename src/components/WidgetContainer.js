@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import APIHelper from "../helpers/apiHelper";
-import WeatherCard from "./WeatherCard";
+import CurrentWeatherCard from "./CurrentWeatherCard";
 import RiseAndSet from "./SunriseAndSet";
 import HourlyWeather from "./HourlyWeather";
 import DailyWeather from "./DailyWeather";
@@ -9,7 +9,7 @@ import { apikey } from "../helpers/apiKey";
 import { LoadingSpinner } from "./Loader";
 import "../styles.css";
 
-class WeeklyWeatherContainer extends Component {
+class WidgetContainer extends Component {
     // Initializes state with empty objects and arrays to popularte relevant API data
     constructor() {
         super();
@@ -54,7 +54,7 @@ class WeeklyWeatherContainer extends Component {
         // Options to pass as 3rd argument to getCurrentPosition()
         const options = {
             enableHighAccuracy: true,
-            timeout: 3000
+            timeout: 6000
         };
         // Only if the browser has this web API will we retrieve user location and subsequently use it to fetch data. If permission is denied, or request times out, fetchData() takes the default parameters.
         if (navigator.geolocation) {
@@ -138,14 +138,14 @@ class WeeklyWeatherContainer extends Component {
         // Renders the Weather Widget only if isLoaded is true (i.e. API has responded 200 with data). Otherwise, renders a loading spinner.
         if (this.state.isLoaded) {
             return (
-                <div className="weekly-weather-container animated-fade-in">
+                <div className="widget-container animated-fade-in">
                     <Buttons
                         handleClick={this.handleClick}
                         toggleDarkMode={this.toggleDarkMode}
                         farenheit={this.state.farenheit}
                         darkMode={this.state.darkMode}
                     />
-                    <WeatherCard
+                    <CurrentWeatherCard
                         data={this.state}
                         farenheit={this.state.farenheit}
                     />
@@ -170,4 +170,4 @@ class WeeklyWeatherContainer extends Component {
     };
 };
 
-export default WeeklyWeatherContainer;
+export default WidgetContainer;

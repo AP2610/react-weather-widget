@@ -104,7 +104,7 @@ svg {
 
 /* Weekly container styles */
 
-.weekly-weather-container {
+.widget-container {
   width: 100%;
   padding: 15px 0px;
 }
@@ -266,7 +266,7 @@ svg {
 
 /* Responsive styles */
 @media (min-width: 600px) {
-  .weekly-weather-container {
+  .widget-container {
     width: 400px;
     border: 1px solid #fff;
     border-radius: 5px;
@@ -274,7 +274,7 @@ svg {
     transition: all 3s;
     margin: 30px 0px;
   }
-  .weekly-weather-container:hover {
+  .widget-container:hover {
     box-shadow: 1px 20px 40px rgba(0, 0, 0, 0.8);
     transition: all 1s;
   }
