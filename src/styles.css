@@ -106,13 +106,15 @@ svg {
 
 .weekly-weather-container {
   width: 100%;
-  padding: 30px 0px;
+  padding: 15px 0px;
 }
 
 /* Loading spinner styles */
 
 .loading-spinner {
-  padding: 30px 0px;
+  padding: 30px;
+  position: relative;
+  top: 250px;
 }
 
 /* Weather Card Styles */
@@ -188,6 +190,7 @@ svg {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+  transition: all 2s;
 }
 
 .hourly-weather-card {
@@ -235,6 +238,8 @@ svg {
 
 .buttons {
   padding: 10px;
+  /* position: sticky;
+  top: 0; */
 }
 
 .button-top {
@@ -274,7 +279,7 @@ svg {
     transition: all 1s;
   }
   .hourly-weather-container:hover {
-    background-color: rgba(252, 120, 0, 0.8);
-    transition: all 1s;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: all 2s;
   }
 }

@@ -42,7 +42,7 @@ class WeeklyWeatherContainer extends Component {
                     dailyData: data.daily.data
                 })
             }).catch(error => {
-                console.log("Sorry, there was an error: ", error)
+                console.log("Sorry, there was an error: ", error.message)
                 alert("Sorry, it seems like there was an error retreiving the weather information. Please try again later!")
             });
     };
@@ -66,7 +66,7 @@ class WeeklyWeatherContainer extends Component {
             },
                 (error) => {
                     if (error.code === error.PERMISSION_DENIED || error.code === error.TIMEOUT) {
-                        console.log("Location permission denied or the request timed out")
+                        console.log("Location permission denied or the request timed out: ", error.message)
                         this.fetchData(lat, long, key, unit)
                     };
                 },
@@ -101,22 +101,23 @@ class WeeklyWeatherContainer extends Component {
         return formattedDailyData;
     };
 
+    // Event handler to handle clicking of unit(i.e. farenheit or celsius) button and dark mode button
     handleClick = (e) => {
-        if (e.target.matches("#button-unit")) {
+        e.target.matches("#button-unit")
+            ?
             this.setState(prevState => {
                 return {
                     ...prevState,
                     farenheit: !prevState.farenheit
                 };
-            });
-        } else {
+            })
+            :
             this.setState(prevState => {
                 return {
                     ...prevState,
                     darkMode: !prevState.darkMode
                 };
             });
-        };
     };
 
     render() {
@@ -131,12 +132,8 @@ class WeeklyWeatherContainer extends Component {
         // Mapping from getDailyWeather to render array of components
         const dailyWeather = this.getDailyWeather().map(weather => <DailyWeather key={weather.time} data={weather} farenheit={this.state.farenheit} />);
 
-        if (this.state.darkMode) {
-            document.body.classList.add('dark-mode')
-        } else {
-            document.body.classList.remove('dark-mode')
-        }
-        // style={this.state.darkMode ? { backgroundColor: "#000" } : { backgroundColor: "initial" }}
+        // If dark mode is true, add or remove the relevant class
+        this.state.darkMode ? document.body.classList.add('dark-mode') : document.body.classList.remove('dark-mode');
 
         // Renders the Weather Widget only if isLoaded is true (i.e. API has responded 200 with data). Otherwise, renders a loading spinner.
         if (this.state.isLoaded) {
