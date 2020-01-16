@@ -1,3 +1,4 @@
+// This is a default API helper class I built to abstract fetch logic and to avoid writing the same thing again and again
 export default class APIHelper {
     constructor(baseUrl){
         this.baseUrl = baseUrl;

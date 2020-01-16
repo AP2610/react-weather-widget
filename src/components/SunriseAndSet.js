@@ -3,6 +3,7 @@ import Time from "./Time";
 import WeatherIcon from "./WeatherIcon";
 import "../styles.css";
 
+// Component houses sunrise and sunset times
 const RiseAndSet = (props) => {
     return (
         <div className="rise-and-set">

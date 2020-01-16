@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTint } from "@fortawesome/free-solid-svg-icons";
 import "../styles.css";
 
+// Component houses the hourly weather forecast from the following hour till the next day
 const HourlyWeather = (props) => {
     return (
         <div className="hourly-weather-card flex-column">

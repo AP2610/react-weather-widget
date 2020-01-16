@@ -56,7 +56,7 @@ class WidgetContainer extends Component {
             enableHighAccuracy: true,
             timeout: 6000
         };
-        // Only if the browser has this web API will we retrieve user location and subsequently use it to fetch data. If permission is denied, or request times out, fetchData() takes the default parameters.
+        // Only if the browser has this web API will we retrieve user location and subsequently use it to fetch data. If permission is denied, or request times out, fetchData() takes the default parameters. This Web API takes a while sometime, so perhaps in the future one would include a geocoder as well so that users can search for location if the request timesout.
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(data => {
                 console.log("Location permission granted")

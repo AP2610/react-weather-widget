@@ -1,1 +1,2 @@
+// This file was hidden at first via .gitignore. However due to netlify deploy issues, I had to unignore it. In the future, it would be best to separate the API call using the key in the backend in order to retrieve data, and then make a call to your backend API from the front-end so the key is never exposed to the client
 export const apikey = "78ddbb0eef728d7c015c7f1e66d4a626"

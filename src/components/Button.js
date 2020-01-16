@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles.css";
 
+// Buttons for toggling degrees unit type and dark/light mode
 const Buttons = (props) => {
     return (
         <div className="buttons flex-center-spacebetween">

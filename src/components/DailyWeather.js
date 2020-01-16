@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTint } from "@fortawesome/free-solid-svg-icons";
 import "../styles.css";
 
+// Component houses daily weather data for the following week
 const DailyWeather = (props) => {
     return (
         <div className="daily-weather-card flex-center-spacebetween">

@@ -1,6 +1,7 @@
 import React from "react";
 import Loader from "react-loader-spinner";
 
+// A loader to display while external calls are made
 const LoadingSpinner = () => {
     return (
         <Loader 

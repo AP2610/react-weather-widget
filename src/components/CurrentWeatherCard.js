@@ -5,6 +5,7 @@ import Time from "./Time";
 import WeatherIcon from "./WeatherIcon";
 import "../styles.css";
 
+// Component to display current weather conditions for any given time at the top of the widget. Includes logic to check if farenheit or celsius should be displayed
 const CurrentWeatherCard = (props) => {
     return (
         <div className="current-weather-card flex-column">
