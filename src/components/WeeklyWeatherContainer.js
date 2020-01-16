@@ -5,7 +5,7 @@ import RiseAndSet from "./SunriseAndSet";
 import HourlyWeather from "./HourlyWeather";
 import DailyWeather from "./DailyWeather";
 import Buttons from "./Button";
-import { APIKEY } from "../helpers/apiKey";
+import { apikey } from "../helpers/apiKey";
 import { LoadingSpinner } from "./Loader";
 import "../styles.css";
 
@@ -49,7 +49,7 @@ class WeeklyWeatherContainer extends Component {
 
     componentDidMount = () => {
         // Default API parameters
-        const { lat, long, key, unit } = { lat: 52.370216, long: 4.895168, key: APIKEY, unit: "si" };
+        const { lat, long, key, unit } = { lat: 52.370216, long: 4.895168, key: apikey, unit: "si" };
 
         // Options to pass as 3rd argument to getCurrentPosition()
         const options = {
